@@ -1,5 +1,6 @@
 package com.tni.edu.sample.DemoApp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class Course {
     @JoinTable(name = "course_coursecontents_mapping",
     joinColumns = @JoinColumn(name = "course_id"),
     inverseJoinColumns = @JoinColumn(name = "content_id"))
-    private Set<CourseContents> courseContentsSet = new HashSet<>();
+    @JsonIgnore
+    private Set<CourseContents> coursecontentsset = new HashSet<>();
 
 }

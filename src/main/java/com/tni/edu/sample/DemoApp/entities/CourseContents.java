@@ -1,5 +1,6 @@
 package com.tni.edu.sample.DemoApp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,9 +24,22 @@ public class CourseContents {
     private int id;
 
     @Column(name= "content")
-    private String coursename;
+    private String content;
 
-    @ManyToMany(mappedBy = "coursecontents")
+    @ManyToMany(mappedBy = "coursecontentsset")
+    @JsonIgnore
     private Set<Course> courses = new HashSet<>();
 
+    public void addCourse(Course course) {
+        this.courses.add(course);
+    }
+
+    @Override
+    public String toString() {
+        return "CourseContents{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", courses=" + courses +
+                '}';
+    }
 }

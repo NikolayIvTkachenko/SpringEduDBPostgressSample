@@ -20,27 +20,41 @@ public class CourseService {
     @Autowired
     CourseRepository courseRepository;
 
-    public CourseService(){}
+    public CourseService() {
+    }
 
     public Course addCourseWithContents(CourseRequest courseRequest) {
         Course course = new Course();
 
+        System.out.println("----------------");
+        System.out.println(courseRequest);
+
+        System.out.println(courseRequest.coursecontents.size());
+        System.out.println("=================");
+
         course.setId(courseRequest.id);
         course.setCoursename(courseRequest.coursename);
-        course.setCourseContentsSet(
-                courseRequest.courseContents
+        course.setCoursecontentsset(
+                courseRequest.coursecontents
                         .stream()
-                        .map(coursecontent -> {
-                            CourseContents ccontents = coursecontent;
-                            if (ccontents.getId() > 0) {
-                                ccontents = courseContentRepository.findById(ccontents.getId());
-                            }
-                            ccontents.getCourses().add(course);
-                            return ccontents;
-                        })
-                        .collect(Collectors.toSet())
-        );
+                        .map(
+                                coursecontent -> {
+                                    System.out.println("coursecontent.id = " + coursecontent.getId());
+                                    System.out.println("coursecontent = " + coursecontent);
 
+                                    CourseContents ccontents = coursecontent; //new CourseContents();
+                                    System.out.println("ccontents= " + ccontents);
+//                                    ccontents.setId(coursecontent.getId());
+//                                    ccontents.setContent(coursecontent.getContent());
+//                                    ccontents.setCourses(coursecontent.getCourses());
+
+                                    if (ccontents.getId() > 0) {
+                                        ccontents = courseContentRepository.findById(ccontents.getId());
+                                    }
+                                    ccontents.addCourse(course);  //.getCourses().add(course);
+                                    return ccontents;
+                                })
+                        .collect(Collectors.toSet()));
         return courseRepository.save(course);
     }
 

@@ -9,6 +9,15 @@ public class CourseRequest {
     public int id;
     public String coursename;
 
-    public Set<CourseContents> courseContents;
+    public Set<CourseContents> coursecontents;
 
+
+    @Override
+    public String toString() {
+        return "CourseRequest{" +
+                "id=" + id +
+                ", coursename='" + coursename + '\'' +
+                ", coursecontents=" + coursecontents +
+                '}';
+    }
 }
