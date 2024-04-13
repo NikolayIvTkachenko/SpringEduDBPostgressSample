@@ -2,6 +2,7 @@ package com.tni.edu.sample.DemoApp.controllers;
 
 
 import com.tni.edu.sample.DemoApp.entities.City;
+import com.tni.edu.sample.DemoApp.pojos.CityRequest;
 import com.tni.edu.sample.DemoApp.services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,5 +38,9 @@ public class HomeController {
         return cityService.getCity(cityname);
     }
 
+    @PostMapping("savecity")
+    public City addCity(@RequestBody CityRequest cityRequest) {
+        return cityService.addCity(cityRequest);
+    }
 
 }
