@@ -8,31 +8,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "cities")
-public class City {
+@Table(name = "country")
+public class Country {
 
     @Id
-    @Column(name = "city_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "country_id")
+    private int id;
+
+    @Column(name = "country_name")
+    private String countryname;
+
     @JsonIgnore
-    private Long id;
-
-    @Column(name = "city_name")
-    private String cityname;
-
-    @Column(name = "citycode", columnDefinition = "character varying(3) not null default 'NA'")
-    private String citycode;
-
-    @Transient
-    private String beanid;
-
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "country_id")
-    private Country country;
+    private Set<City> cities;
+
 
 }
