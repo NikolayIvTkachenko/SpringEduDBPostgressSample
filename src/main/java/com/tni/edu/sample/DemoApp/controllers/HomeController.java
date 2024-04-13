@@ -2,8 +2,11 @@ package com.tni.edu.sample.DemoApp.controllers;
 
 
 import com.tni.edu.sample.DemoApp.entities.City;
+import com.tni.edu.sample.DemoApp.entities.Course;
 import com.tni.edu.sample.DemoApp.pojos.CityRequest;
+import com.tni.edu.sample.DemoApp.pojos.CourseRequest;
 import com.tni.edu.sample.DemoApp.services.CityService;
+import com.tni.edu.sample.DemoApp.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,9 @@ public class HomeController {
 
     @Autowired
     CityService cityService;
+
+    @Autowired
+    CourseService courseService;
 
     @GetMapping("sayHello")
     public String sayHello() {
@@ -42,5 +48,12 @@ public class HomeController {
     public City addCity(@RequestBody CityRequest cityRequest) {
         return cityService.addCity(cityRequest);
     }
+
+
+    @PostMapping("addcourse")
+    public Course addCourse(@RequestBody CourseRequest courseRequest) {
+        return courseService.addCourseWithContents(courseRequest);
+    }
+
 
 }
