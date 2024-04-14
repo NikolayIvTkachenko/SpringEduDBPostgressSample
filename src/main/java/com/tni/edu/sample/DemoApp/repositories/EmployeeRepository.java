@@ -12,4 +12,12 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     Employee findById(int id);
     List<Employee> findByEmployeename(String employeename);
 
+    List<Employee> findByDepartmentAndAgeLessThan(String department, int age);
+
+    List<Employee> findByEmployeenameStartingWith(String employeename);
+
+    List<Employee> findByEmployeenameContaining(String employeename);
+
+    List<Employee> findByEmployeenameEndingWith(String employeename);
+
 }

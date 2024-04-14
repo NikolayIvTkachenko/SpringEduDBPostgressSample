@@ -2,6 +2,7 @@ package com.tni.edu.sample.DemoApp.controllers;
 
 
 import com.tni.edu.sample.DemoApp.entities.Employee;
+import com.tni.edu.sample.DemoApp.repositories.EmployeeRepository;
 import com.tni.edu.sample.DemoApp.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,9 @@ public class EmployeeController {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     @PostMapping("addemployees")
     public List<Employee> addAllEmployees(@RequestBody List<Employee> employees) {
@@ -35,4 +39,28 @@ public class EmployeeController {
         return employeeService.findEmployeeById(id);
     }
 
+    @GetMapping("employeesbyids")
+    public List<Employee> getEmployeesByIds(@RequestBody List<Integer> ids) {
+        return employeeService.findAllEmployeesByIds(ids);
+    }
+
+    @GetMapping("empbydeptandage")
+    public List<Employee> getEmpByDeptAndAGe(@RequestParam String department, @RequestParam int age) {
+        return employeeRepository.findByDepartmentAndAgeLessThan(department, age);
+    }
+
+    @GetMapping("empbyname")
+    public List<Employee> getEmpByName(@RequestParam String employeename) {
+        return employeeRepository.findByEmployeenameStartingWith(employeename);
+    }
+
+//    @GetMapping("empbyname")
+//    public List<Employee> getEmpByName(@RequestParam String employeename) {
+//        return employeeRepository.findByEmployeenameStartingWith(employeename);
+//    }
+//
+//    @GetMapping("empbyname")
+//    public List<Employee> getEmpByName(@RequestParam String employeename) {
+//        return employeeRepository.findByEmployeenameStartingWith(employeename);
+//    }
 }
