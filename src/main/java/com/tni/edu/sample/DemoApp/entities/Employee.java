@@ -38,6 +38,9 @@ public class Employee implements Serializable {
     @Column(name = "age")
     private int age;
 
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "salary")
     private float salary;
 
